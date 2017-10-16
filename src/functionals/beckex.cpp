@@ -1,4 +1,5 @@
 #include "functional.hpp"
+#include "constants.hpp"
 
 template<class num>
 static num becke_alpha(const num &na, const num &gaa)
@@ -10,6 +11,37 @@ static num becke_alpha(const num &na, const num &gaa)
   num chi2 = gaa*pow(na,-8.0/3.0);
   num b88 = -(d*na43*chi2)/(1+6*d*sqrtx_asinh_sqrtx(chi2));
   return lda + b88;
+}
+
+// Lee, Lee and Paars kinetic energy functional.
+// Phys. Rev. A 44, 768 (1991).
+// new g = 0.003215546875
+template<class num>
+ static num llp91_k(const num &na, const num &gaa)
+{
+ using xc_constants::CF;
+ const parameter c = pow(2.0,2.0/3.0)*CF;
+ const parameter a = 4.4188E-3;
+ const parameter g = 0.0253;
+ num na53 = pow(na,5.0/3.0);
+ num lda = c*na53;
+ num chi2 = gaa*pow(na,-8.0/3.0);
+ num gga = (a*c*na53*chi2)/(1+g*sqrtx_asinh_sqrtx(chi2));
+ return lda + gga;
+}
+
+template<class num>
+ static num llp91_ks(const num &na, const num &gaa)
+{
+  using xc_constants::CF;
+  const parameter c = pow(2.0,2.0/3.0)*CF;
+  const parameter a = 4.4188E-3;
+  const parameter g = 0.03215546875;
+  num na53 = pow(na,5.0/3.0);
+  num lda = c*na53;
+  num chi2 = gaa*pow(na,-8.0/3.0);
+  num gga = (a*c*na53*chi2)/(1+g*sqrtx_asinh_sqrtx(chi2));
+  return lda + gga;
 }
 
 template<class num>
@@ -84,6 +116,19 @@ static num beckecamx(const densvars<num> &d)
   parameter beta = d.get_param(XC_CAM_BETA);
   return becke_cam(alpha,beta,mu,d.a,d.gaa) + becke_cam(alpha,beta,mu,d.b,d.gbb);
 }
+
+template<class num>
+static num llp91k(const densvars<num> &d)
+{
+  return llp91_k(d.a, d.gaa) + llp91_k(d.b, d.gbb);
+}
+
+template<class num>
+static num llp91ks(const densvars<num> &d)
+{
+  return llp91_ks(d.a, d.gaa) + llp91_ks(d.b, d.gbb);
+}
+
 
 FUNCTIONAL(XC_BECKEX) = {
   "Becke 88 exchange",
@@ -170,6 +215,45 @@ FUNCTIONAL(XC_BECKECORRX) = {
   }
 };
 
+FUNCTIONAL(XC_LLP91K) = {
+  "LLP91 kinetic energy functional",
+  "LLP91 kinetic energy functional, Implemented by Moritz Bensberg\n"
+  "Not an original part of xcFun.\n"
+  "Test case from http://www.cse.scitech.ac.uk/ccg/dft/data_pt_x_lda.html\n",
+  XC_DENSITY|XC_GRADIENT,
+  ENERGY_FUNCTION(llp91k)
+  XC_A_B_GAA_GAB_GBB,
+  XC_PARTIAL_DERIVATIVES,
+  2,
+  1e-11,
+  // Reference data obtained with working implementation in libXC
+  // and compared to ADF results
+  {0.39E+02, 0.38E+02, 0.81E+06, 0.82E+06,0.82E+06},
+  { 4.584610965220e+03,
+
+  8.418518384099e+01,
+  8.268894675419e+01,
+  2.798552163230e-04,
+  0.000000000000E+00,
+  2.794796623408e-04,
+
+  1.486757132659e+00,
+  0.000000000000E+00,
+  -8.611445739344e-07,
+  0.000000000000E+00,
+  0.000000000000E+00,
+  1.490091095937e+00,
+  0.000000000000E+00,
+  0.000000000000E+00,
+  -6.848310104379e-07,
+  -1.140141564535e-10,
+  0.000000000000E+00,
+  0.000000000000E+00,
+  0.000000000000E+00,
+  0.000000000000E+00,
+  -1.159097944867e-10}
+};
+
 FUNCTIONAL(XC_BECKESRX) = {
   "Short range Becke 88 exchange",
   "Short range Becke 88 exchange, Implemented by Ulf Ekstrom\n"
@@ -183,4 +267,44 @@ FUNCTIONAL(XC_BECKECAMX) = {
   "Uses XC_RANGESEP_MU\n",
   XC_DENSITY|XC_GRADIENT,
   ENERGY_FUNCTION(beckecamx) };
+
+FUNCTIONAL(XC_LLP91KS) = {
+  "LLP91 kinetic energy functional optimized for subsystem DFT",
+  "LLP91 kinetic energy functional optimized for subsystem DFT\n"
+  "Implemented by Moritz Bensberg\n"
+  "Not an original part of xcFun.\n"
+  "Test case from http://www.cse.scitech.ac.uk/ccg/dft/data_pt_x_lda.html\n",
+  XC_DENSITY|XC_GRADIENT,
+  ENERGY_FUNCTION(llp91ks)
+  XC_A_B_GAA_GAB_GBB,
+  XC_PARTIAL_DERIVATIVES,
+  2,
+  1e-11,
+  // Reference data obtained with working implementation in xcFun
+  // and compared to ADF results
+  {0.39E+02, 0.38E+02, 0.81E+06, 0.82E+06,0.82E+06},
+  { 4.538559033121e+03,
+
+  8.510232713773e+01,
+  8.365402093090e+01,
+  2.460242017894e-04,
+  0.000000000000E+00,
+  2.446688531666e-04,
+
+  1.448955945331e+00,
+  0.000000000000E+00,
+  1.044457826794e-07,
+  0.000000000000E+00,
+  0.000000000000E+00,
+  1.451394306499e+00,
+  0.000000000000E+00,
+  0.000000000000E+00,
+  2.818736159988e-07,
+  -1.157859200527e-10,
+  0.000000000000E+00,
+  0.000000000000E+00,
+  0.000000000000E+00,
+  0.000000000000E+00,
+  -1.167896572749e-10}
+};
 
