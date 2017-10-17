@@ -64,6 +64,7 @@ endif(BUILD_SHARED_LIBS)
 install(TARGETS xcfun DESTINATION lib${LIB_SUFFIX})
 file(GLOB headers "include/*.h")
 install(FILES ${headers} DESTINATION include)
+install(FILES cmake/set_xcFun_Serenity_Interface_Version.cmake DESTINATION share/cmake)
 
 if(ENABLE_FORTRAN_INTERFACE)
     include(FortranCompilers)
