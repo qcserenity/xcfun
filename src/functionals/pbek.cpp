@@ -2,7 +2,6 @@
 #include "pw9xx.hpp"
 
 // PBE2/PBE3/PBE4 kinetic energy Functionals by V.V. Karasiev et. al.
-// multiplied by 2^(2/3) to fit the results obtained with ADF
 // V.V. Karasiev, S.B. Trickey and Frank E. Harris, J. Comput.-Aid. Mat. Des. 13, 111 (2006)
 template<class num>
 static num energy_pbe2(const num &na, const num &gaa)

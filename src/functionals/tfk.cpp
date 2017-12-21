@@ -4,11 +4,17 @@
 //  Thomas-Fermi kinetic energy functional
 
 template<class num>
+static num tfk_energy(const num &na)
+{
+  using xc_constants::CF;
+
+  return CF*pow(2.0,2.0/3.0)*pow(na, 5.0/3.0);
+}
+
+template<class num>
 static num tfk(const densvars<num> &d)
 {
-    using xc_constants::CF;
-
-    return CF*pow(d.n, 5.0/3.0);
+    return tfk_energy(d.a)+tfk_energy(d.b);
 }
 
 FUNCTIONAL(XC_TFK) = {

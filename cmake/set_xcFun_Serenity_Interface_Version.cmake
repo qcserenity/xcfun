@@ -1,1 +1,1 @@
-set (PACKAGE_VERSION "1")
+set (PACKAGE_VERSION "2")
