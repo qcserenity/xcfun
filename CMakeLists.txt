@@ -54,7 +54,12 @@ add_library(
     xcfun
     ${BASE_SOURCES}
     ${FUNCTIONAL_SOURCES}
-    )
+)
+target_include_directories(xcfun
+  PUBLIC
+    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>
+) 
 # Set .so version
 if(BUILD_SHARED_LIBS)
  set_target_properties(xcfun PROPERTIES
