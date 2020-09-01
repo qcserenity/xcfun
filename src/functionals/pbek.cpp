@@ -7,7 +7,7 @@ template<class num>
 static num energy_pbe2(const num &na, const num &gaa)
 {
   using pw91_like_x_internal::S2;
-  using xc_constants::CF;
+  using xcfun_constants::CF;
   const parameter c1 =2.0309;
   const parameter a1 =0.2942;
   num st2 = S2(na, gaa);
@@ -23,7 +23,7 @@ template<class num>
 static num energy_pbe3(const num &na, const num &gaa)
 {
   using pw91_like_x_internal::S2;
-  using xc_constants::CF;
+  using xcfun_constants::CF;
   const parameter c1 =-3.7425;
   const parameter c2 =50.258;
   const parameter a1 =4.1355;
@@ -40,7 +40,7 @@ template<class num>
 static num energy_pbe4(const num &na, const num &gaa)
 {   
   using pw91_like_x_internal::S2;
-  using xc_constants::CF;
+  using xcfun_constants::CF;
   const parameter c1 =-7.2333;
   const parameter c2 =61.645;
   const parameter c3 =-93.683;
@@ -62,7 +62,7 @@ template<class num>
 static num energy_pbe2S(const num &na, const num &gaa)
 {
   using pw91_like_x_internal::S2;
-  using xc_constants::CF;
+  using xcfun_constants::CF;
   const parameter c1 =-7.9691;
   const parameter a1 =31.975108203125;
   num st2 = S2(na, gaa);

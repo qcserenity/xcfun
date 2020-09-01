@@ -14,6 +14,7 @@ target_sources(xcfun
     ${CMAKE_CURRENT_SOURCE_DIR}/btk.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/common_parameters.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/cs.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/e00.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ktx.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/lb94.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ldaerfc.cpp
@@ -36,6 +37,7 @@ target_sources(xcfun
     ${CMAKE_CURRENT_SOURCE_DIR}/optxcorr.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/p86c.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/pbec.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/pbek.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/pbeintc.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/pbeintx.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/pbelocc.cpp

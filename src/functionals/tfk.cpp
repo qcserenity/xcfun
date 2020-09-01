@@ -20,7 +20,7 @@
 template<class num>
 static num tfk_energy(const num &na)
 {
-  using xc_constants::CF;
+  using xcfun_constants::CF;
 
   return CF*pow(2.0,2.0/3.0)*pow(na, 5.0/3.0);
 }

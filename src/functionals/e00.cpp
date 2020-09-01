@@ -7,7 +7,7 @@ template<class num>
 static num energy_e00(const num &na, const num &gaa)
 {
   using pw91_like_x_internal::S2;
-  using xc_constants::CF;
+  using xcfun_constants::CF;
   num st2 = S2(na, gaa);
   num na53 = pow(na,5.0/3.0);
   num lda = CF*na53;

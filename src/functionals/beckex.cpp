@@ -31,7 +31,7 @@ template <typename num> static num becke_alpha(const num & na, const num & gaa) 
 template<class num>
  static num llp91_k(const num &na, const num &gaa)
 {
- using xc_constants::CF;
+ using xcfun_constants::CF;
  const parameter c = pow(2.0,2.0/3.0)*CF;
  const parameter a = 4.4188E-3;
  const parameter g = 0.0253;
@@ -45,7 +45,7 @@ template<class num>
 template<class num>
  static num llp91_ks(const num &na, const num &gaa)
 {
-  using xc_constants::CF;
+  using xcfun_constants::CF;
   const parameter c = pow(2.0,2.0/3.0)*CF;
   const parameter a = 4.4188E-3;
   const parameter g = 0.03215546875;
