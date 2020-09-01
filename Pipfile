@@ -1,0 +1,20 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+[dev-packages]
+
+Sphinx = "*"
+breathe = "*"
+numpy = "*"
+pytest = "*"
+pyyaml = "*"
+sphinx_rtd_theme = "*"
+flake8 = "*"
+yapf = "*"
+recommonmark = "*"

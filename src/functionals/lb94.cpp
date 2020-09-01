@@ -1,12 +1,26 @@
+/*
+ * XCFun, an arbitrary order exchange-correlation library
+ * Copyright (C) 2020 Ulf Ekström and contributors.
+ *
+ * This file is part of XCFun.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * For information on the complete list of contributors to the
+ * XCFun library, see: <https://xcfun.readthedocs.io/>
+ */
+
 #if 0 // Does not work and should maybe not be here in the first place
 #include "functional.hpp"
-#include "vwn.hpp"
 #include "slater.hpp"
+#include "vwn.hpp"
 
 //Have to be a bit special here since lb94 is not a functional but 
 //a potential.
 
-template<class T, int Nvar, int Ndeg>
+template<typename T, int Nvar, int Ndeg>
 static taylor<T,Nvar,Ndeg> lb94(const densvars<taylor<T,Nvar,Ndeg> > &d)
 {
   const parameter beta = 0.05;
